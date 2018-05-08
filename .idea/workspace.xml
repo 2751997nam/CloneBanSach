@@ -330,12 +330,20 @@
       <updated>1525779274055</updated>
       <workItem from="1525779275216" duration="148000" />
       <workItem from="1525781410965" duration="9598000" />
-      <workItem from="1525792727504" duration="868000" />
+      <workItem from="1525792727504" duration="1787000" />
     </task>
+    <task id="LOCAL-00001" summary="clone BanSach repository and add forgot password feature">
+      <created>1525793663741</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1525793663741</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10614000" />
+    <option name="totallyTimeSpent" value="11533000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -367,6 +375,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="clone BanSach repository and add forgot password feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="clone BanSach repository and add forgot password feature" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/User.php">
