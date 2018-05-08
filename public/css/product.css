@@ -1,0 +1,84 @@
+.list-header {
+    border-bottom: 1px solid gray
+}
+.list-header strong {
+    margin-left: 10px
+}
+
+.list-body {
+    padding: 1%;
+}
+
+.book {
+    float: left;
+    display: inline-block;
+    width: 190px;
+    min-height: 310px;
+    background: #ffffff;
+    margin: 7px 10px 0px 0px;
+    position: relative
+}
+.discount-div {
+    text-align: center;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.discount {
+    color: yellow;
+    position: absolute;
+    top: 14px;
+    right: 15px;
+}
+.sidebar {
+    display: inline-block;
+}
+.product-search-items {
+    width: 85%;
+    float: left;
+    display: inline-block;
+}
+.product {
+    width: 100%;
+}
+.page-controller {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.product-filter {
+    background-color: white;
+    display: inline-flex;
+    width: 100%;
+    text-align: center;
+}
+
+.filter-option {
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5rem;
+    width: 25%;
+    border-right: 1px solid gainsboro;
+}
+
+.filter-option a {
+    display: block;
+    color: #0f0f0f;
+}
+.selected {
+    border-bottom: 3px solid orangered;
+}
+
+.dropdown a {
+    font-size: 20px;
+    text-align: center;
+}
+.dropdown-menu {
+    text-align: center;
+    left: 15%;
+    right: 15%;
+}

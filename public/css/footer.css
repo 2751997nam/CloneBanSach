@@ -1,0 +1,25 @@
+.footer {
+    border-top: 3px solid orangered;
+    background-color: #f6fbe5;
+}
+
+.footer-category-list-column {
+    display: inline-grid;
+    width: 230px;
+}
+
+.footer-category-list-header {
+    margin-top: 40px;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(0,0,0,.54);
+}
+
+.footer-category-list {
+    margin-top: 40px;
+}
+
+.footer-category-list a {
+    color: rgba(0,0,0,.54);
+}
+

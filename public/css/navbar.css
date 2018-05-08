@@ -1,0 +1,138 @@
+.navbarN ul {
+    padding: 0%;
+}
+.navbarN a {
+    text-decoration: none;
+    color: white;
+}
+ul li{
+    list-style: none;
+}
+
+.navbar-top{
+    padding: 0% 10%;
+    background-color: #f74d18;
+    height:35px;
+
+}
+.navbar-top ul {
+    width: 1200px;
+    height: 18px;
+}
+.navbar-link{
+    display: inline;
+    margin-left: 5px;
+}
+
+.navbar-top-left{
+    margin-top: 8px;
+    float: left;
+}
+.navbar-top-right{
+    margin-top: 8px;
+    float: right;
+}
+
+.navbar-content {
+    padding: 12px 10% 0 10%;
+    height: 75px;
+    background-color: #ff5722;
+    position: relative
+}
+
+.search {
+    overflow: hidden;
+    position: absolute;
+    margin-left: 111px;
+    width: 800px;
+    display: inline-block;
+}
+
+.cart-dropdown {
+    z-index: 1500;
+    position: absolute;
+    display: inline-block;
+    width: 100px;
+    height: 60px;
+    right: 75px;
+}
+.cart-dropdown-menu {
+    box-shadow: 0 0.1rem 5rem 0 rgba(0,0,0,.2);
+    border-radius: 2px;
+    padding: 10px;
+    z-index: 1000;
+    margin-top: 10px;
+    display: none;
+    background-color: #e0ffc5;
+    position: absolute;
+    min-width: 300px;
+    right: -20px;
+}
+
+.arrow-up {
+    display: block;
+    float: right;
+}
+
+.cart-dropdown:hover .cart-dropdown-menu {
+    display: block;
+
+}
+.form-inline input {
+    min-width: 729px;
+}
+.hot-words {
+    float: left;
+    position: relative;
+    /*margin-left: 180px;*/
+    /*margin-top: 30px;*/
+}
+
+.hot-words-items {
+    font-size: 12px;
+    margin-right: 15px;
+}
+#btn-search {
+    float: right;
+}
+
+#cartSize {
+    display: none;
+    background-color: white;
+    border-radius: 10px;
+    width: 30px;
+    height: 20px;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    right: 45px
+}
+.account {
+    position: relative;
+    display: inline-block;
+    height: 35px;
+    margin-left: 15px;
+}
+.account:hover .account-dropdown {
+    display: block;
+}
+.account-dropdown {
+    box-shadow: 0 0.1rem 5rem 0 rgba(0,0,0,.2);
+    border-radius: 2px;
+    z-index: 2000;
+    width: 160px;
+    right: 0;
+    padding: 0% 5% 5% 5%;
+    background-color: white;
+    position: absolute;
+    display: none;
+}
+.account-dropdown li {
+    padding: 5px 0px;
+}
+.account-dropdown a {
+    color: black;
+}
+.account-dropdown a:hover {
+    color: orangered;
+}

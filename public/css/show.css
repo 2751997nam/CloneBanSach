@@ -1,0 +1,44 @@
+.discount-div {
+    text-align: center;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.discount {
+    color: yellow;
+    position: absolute;
+    top: 14px;
+    right: 15px;
+}
+.book-detail-header {
+    border-bottom: 1px solid grey;
+}
+.book-detail-options {
+    text-align: center;
+    padding: 0% 1%;
+    line-height: 5rem;
+    display: inline-block;
+}
+
+.book-detail-options span {
+    color: orangered;
+}
+.chose {
+    border-bottom: 2px solid orangered;
+}
+
+.book-description {
+    padding: 1%;
+}
+
+.book {
+    float: left;
+    display: inline-block;
+    width: 190px;
+    min-height: 310px;
+    background: #ffffff;
+    margin: 7px 10px 0px 0px;
+    position: relative
+}

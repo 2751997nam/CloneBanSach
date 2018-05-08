@@ -1,0 +1,53 @@
+.carousel {
+    width: 1200px;
+}
+
+.carousel-control {
+    height: 50px;
+    width: 70px;
+    top: 45%;
+    display: none;
+}
+.carousel.slide:hover .carousel-control {
+    display: block;
+}
+
+
+
+.popular {
+    width: 1200px;
+}
+
+.book {
+    float: left;
+    display: inline-block;
+    width: 190px;
+    min-height: 310px;
+    background: #ffffff;
+    margin: 7px 10px 0px 0px;
+    position: relative
+}
+.discount-div {
+    text-align: center;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.discount {
+    color: yellow;
+    position: absolute;
+    top: 14px;
+    right: 15px;
+}
+.slider-items {
+    display: inline-grid;
+}
+
+
+.border-top {
+    border-top: 3px solid #f74d18;
+}
+
+
