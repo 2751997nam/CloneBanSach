@@ -1,13 +1,13 @@
+<link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
 <div class="popular" style="margin-top: 30px">
     <div class="popular-header">
-        <span>Sách Bán Chạy</span>
-        <span><a href="javascript:void(0)" style="float: right; color: #f74d18">Xem Tất Cả ></a></span>
+        <span>{{ $carousel_name }}</span>
     </div>
     <div class="popular-body border-top">
         <div id="popular-slider" class="carousel slide" data-ride="carousel" data-type="multi">
             <div class="carousel-inner" >
                 @php
-                    $len = count($books);
+                    $len = count($carouselBooks);
                     $i = 0;
                     $k = 0;
                 @endphp
@@ -19,23 +19,23 @@
                             @if($k >= $len) @break
                             @endif
                             <div class="book slider-items" style="float: left">
-                                <a href="{{ url('product/show/'. $books[$k]->id) }}">
-                                <img src="{{ \Illuminate\Support\Facades\Storage::url($books[$k]->img) }}" alt="{{$books[$k]->name}}" width="190" height="190">
-                                @if($books[$k]->discount > 0)
+                                <a href="{{ url('product/show/'. $carouselBooks[$k]->id) }}">
+                                <img src="{{ \Illuminate\Support\Facades\Storage::url($carouselBooks[$k]->img) }}" alt="{{$carouselBooks[$k]->name}}" width="190" height="190">
+                                @if($carouselBooks[$k]->discount > 0)
                                     <div class="discount-div" >
                                         <img src="/images/discount.png" alt="discount" >
-                                        <strong class="discount" >Giảm <p>{{ $books[$k]->discount }}%</p></strong>
+                                        <strong class="discount" >Giảm <p>{{ $carouselBooks[$k]->discount }}%</p></strong>
                                     </div>
                                 @endif
                                 <div class="book-details" style="padding: 5%">
                                     <div style="height: 45px; float: top">
-                                        {{ strlen($books[$k]->name) > 45?substr($books[$k]->name,0, 45)."...":$books[$k]->name }}
+                                        {{ strlen($carouselBooks[$k]->name) > 45?substr($carouselBooks[$k]->name,0, 45)."...":$carouselBooks[$k]->name }}
                                     </div>
                                     <div style="float: bottom">
                                             <span>
-                                                @php($price = $books[$k]->price)
-                                                <span style="color: orangered">{{$books[$k]->price * (100- $books[$k]->discount) / 100}}đ</span>
-                                                @if($books[$k]->discount > 0)<strike style="color: grey">{{ strlen((string) $price)>7?substr((string)$price, 0, 4)."...":$price }}đ</strike>
+                                                @php($price = $carouselBooks[$k]->price)
+                                                <span style="color: orangered">{{$carouselBooks[$k]->price * (100- $carouselBooks[$k]->discount) / 100}}đ</span>
+                                                @if($carouselBooks[$k]->discount > 0)<strike style="color: grey">{{ strlen((string) $price)>7?substr((string)$price, 0, 4)."...":$price }}đ</strike>
                                                 @endif
                                                 <i class="fas fa-truck" style="float: right; color: #2aabd2">free</i>
                                             </span>
@@ -43,7 +43,7 @@
                                     @php($count = 0)
                                     @php($likes = 0)
                                     @php($stars = 0)
-                                    @foreach($books[$k]->users as $u)
+                                    @foreach($carouselBooks[$k]->users as $u)
                                         @php($u->pivot->comment != null ? $count++ :"")
                                         @php($stars += $u->pivot->star)
                                         @if($u->pivot->isLike == 1) @php($likes++)
@@ -57,7 +57,7 @@
                                         @if($user === null)
                                             <i class="fas fa-heart"></i>
                                         @else
-                                            @php($rated = $user->books->find($books[$k]->id))
+                                            @php($rated = $user->books->find($carouselBooks[$k]->id))
                                             @if($rated !== null && $rated->pivot->isLike === 1)
                                                 <i class="fas fa-heart liked"></i>
                                             @else
@@ -66,7 +66,7 @@
                                         @endif
                                         <span style="color: grey">{{ $likes }}</span>
                                         <input type="hidden" name="likes" value="{{ $likes  }}">
-                                        <input type="hidden" name="book_id" value="{{ $books[$k]->id }}">
+                                        <input type="hidden" name="book_id" value="{{ $carouselBooks[$k]->id }}">
                                     </a>
 
                                     <div class="rated-stars" style="display: inline; float: right">
