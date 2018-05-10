@@ -24,6 +24,7 @@ html, body {
     padding-left: 0;
     float: left;
     min-height: 100%;
+    padding-right: 0;
 }
 
 #sidebar .collapse.in {

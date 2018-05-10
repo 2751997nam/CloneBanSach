@@ -122,7 +122,7 @@
     </div>
 
     <div class="form-footer">
-        <label for="rememberMe"><input type="checkbox" name="rememberMe">Remember Me</label>
+        <label for="rememberMe"><input type="checkbox" name="rememberMe" checked>Remember Me</label>
         <a href="{{ route('password.request') }}" style="color: grey; text-decoration: none">Quên Mật Khẩu?</a>
         <a href="{{ route('register') }}" style="float: right; color: grey; text-decoration: none">Đăng Ký</a>
     </div>

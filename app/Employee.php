@@ -9,7 +9,7 @@ class Employee extends Model
     protected $table = "employees";
 
     protected $fillable = [
-        'salary_level', 'dob'
+        'employee_code', 'id', 'position_id', 'dob','salary_level', 'dob'
     ];
 
     public function user() {

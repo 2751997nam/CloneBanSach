@@ -50,7 +50,7 @@ class BillController extends Controller
         $bills = $bills->leftjoin(DB::raw('(select `order_id`, SUM( `order_items`.`price` * `order_items`.`quantity` * (100 - `order_items`.`discount`) / 100) as `total` 
                               from `order_items` 
                               group by `order_id`) as totals'), 'bills.order_id' , '=' , 'totals.order_id')->where('bill_code', 'like', '%'.$request->session()->get('search').'%')
-                ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate(5);
+                ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate(20);
 //        return $bills;
 
         $page = $bills->currentPage();

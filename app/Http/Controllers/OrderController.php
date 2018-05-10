@@ -84,15 +84,21 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $this->addSession($request);
-
-//        $orders = new Order();
-        $orders = Order::with('order_items')->whereNotIn('orders.id', Bill::where('was_paid', '=', '1')->pluck('order_id'))
+        $orders = new Order();
+        $orders = Order::with('order_items')
+            ->whereNotIn('orders.id', Bill::where('was_paid', '=', '1')->pluck('order_id'))
             ->where('name', 'like', '%'.$request->session()->get('search').'%')
-            ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate(5);
+            ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate(20);
+//        $orders = Order::
+//            whereNotIn('orders.id', Bill::where('was_paid', '=', '1')->pluck('order_id'))
+//            ->where('name', 'like', '%'.$request->session()->get('search').'%')
+//            ->orderBy($request->session()->get('field'), $request->session()->get('sort'))
+//            ->paginate(100);
         $page = $orders->currentPage();
 //        return $orders;
 
-        $employees = Employee::with('user')->where('position_id', '=', '3')->orderBy('employee_code')->get();
+        $employees = Employee::with('user')
+            ->where('position_id', '=', '3')->orderBy('employee_code')->get();
 //        return $employees;
         if($request->ajax()) {
             return view('order.index', compact('orders', 'page', 'employees'));
