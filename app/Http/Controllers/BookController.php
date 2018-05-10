@@ -11,7 +11,7 @@ use Mockery\Exception;
 class BookController extends Controller
 {
     public function addSession(Request $request) {
-        //        session()->flush();
+//                session()->flush();
         $check = ['id', 'book_code', 'name', 'price', 'author', 'publisher', 'quantity', 'discount', 'created_at', 'updated_at'];
         if(session()->has('field') && in_array(session()->get('field'), $check)) session()->forget('field');
         if(session()->has('search') && in_array(session()->get('search'), $check)) session()->forget('search');

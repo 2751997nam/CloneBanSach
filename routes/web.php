@@ -18,8 +18,23 @@ Route::get('/', function () {
         $user = Auth::user();
         $carts = $user->bookCarts;
     }
-    $books = \App\Book::with("users")->get();
-    return view('welcome', compact('books', 'user', 'carts'));
+//    $books = \App\Book::with("users")->get();
+    $carouselBooks = \App\Book::with("users")->whereIn('book_code',
+            DB::table('order_items')->select('order_items.book_code', \Illuminate\Support\Facades\DB::raw('count(*) as total'))
+                ->groupBy('book_code')
+                ->orderBy('total', 'desc')->limit(18)->pluck('book_code')
+        )->get();
+//    return $popularBooks;
+    $recommendBooks = \App\Book::with("users")->whereIn('book_code',
+        DB::table('order_items')->select('order_items.book_code', \Illuminate\Support\Facades\DB::raw('count(*) as total'))
+            ->whereDate('created_at', '>=' , \Carbon\Carbon::now()->subDay(30))
+            ->groupBy('book_code')
+            ->orderBy('total', 'desc')->limit(18)->pluck('book_code')
+        )->get();
+//    return $recommendBooks;
+//    $books = $popularBooks;
+    $carousel_name = "Sách Bán Chạy";
+    return view('welcome', compact('carouselBooks', 'recommendBooks', 'user', 'carts', 'carousel_name'));
 })->name('index');
 
 Route::resource('/book', 'BookController')->middleware('auth');

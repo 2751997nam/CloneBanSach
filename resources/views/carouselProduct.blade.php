@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
+<link rel="stylesheet" href="{{ asset('css/carouselProduct.css') }}">
 <div class="popular" style="margin-top: 30px">
     <div class="popular-header">
         <span>{{ $carousel_name }}</span>
@@ -29,7 +29,7 @@
                                 @endif
                                 <div class="book-details" style="padding: 5%">
                                     <div style="height: 45px; float: top">
-                                        {{ strlen($carouselBooks[$k]->name) > 45?substr($carouselBooks[$k]->name,0, 45)."...":$carouselBooks[$k]->name }}
+                                        {{ strlen($carouselBooks[$k]->name) > 30?substr($carouselBooks[$k]->name,0, 30)."...":$carouselBooks[$k]->name }}
                                     </div>
                                     <div style="float: bottom">
                                             <span>

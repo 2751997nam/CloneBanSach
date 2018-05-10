@@ -25,3 +25,7 @@
     margin: 7px 10px 0px 0px;
     position: relative
 }
+
+.border-top {
+    border-top: 3px solid #f74d18;
+}

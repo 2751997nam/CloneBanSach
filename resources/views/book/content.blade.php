@@ -18,7 +18,7 @@
                     </th>
 
                     <th style="vertical-align: middle; width: 120px">Img</th>
-                    <th style="width: 100px">Categories</th>
+                    <th style="width: 150px">Categories</th>
 
                     <th style="vertical-align: middle;width: 100px"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('book?field=author&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Author</a>
                         {{ request()->session()->get('field')=='author'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
@@ -60,7 +60,7 @@
                     <td style="overflow: hidden">{{ $book->name }}</td>
                     <td style="overflow: hidden"><img src="{{ Storage::url($book->img) }}" alt="{{ $book->img_name }}" width="100px" height="150px"></td>
                     <td style="overflow: hidden">@foreach($cates as $cate)
-                        <span>{{ $cate }}</span>
+                        <span style="background-color: gainsboro; border-radius: 3px; line-height: 25px; padding: 2px">{{ $cate }}</span>
                         @endforeach
                     </td>
 

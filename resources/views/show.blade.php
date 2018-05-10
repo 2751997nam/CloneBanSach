@@ -137,6 +137,7 @@
         </div>
     </div>
     <input type="hidden" id="cartSize" value="">
+    @include('carouselProduct')
 @endsection
 
 @section('script')

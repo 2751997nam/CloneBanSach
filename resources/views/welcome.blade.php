@@ -8,7 +8,7 @@
 
 @section('content')
     @include('carousel')
-    @include('popular')
+    @include('carouselProduct')
     @include('recommend')
 @endsection
 

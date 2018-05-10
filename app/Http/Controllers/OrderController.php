@@ -89,11 +89,6 @@ class OrderController extends Controller
             ->whereNotIn('orders.id', Bill::where('was_paid', '=', '1')->pluck('order_id'))
             ->where('name', 'like', '%'.$request->session()->get('search').'%')
             ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate(20);
-//        $orders = Order::
-//            whereNotIn('orders.id', Bill::where('was_paid', '=', '1')->pluck('order_id'))
-//            ->where('name', 'like', '%'.$request->session()->get('search').'%')
-//            ->orderBy($request->session()->get('field'), $request->session()->get('sort'))
-//            ->paginate(100);
         $page = $orders->currentPage();
 //        return $orders;
 

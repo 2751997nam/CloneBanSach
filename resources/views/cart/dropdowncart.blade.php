@@ -10,7 +10,7 @@
         <div class="cart-info" style="display: block; margin: 10px 0">
             <div class="cart-title" style="display: inline-block">
                 <img src="{{ \Illuminate\Support\Facades\Storage::url($cart->img) }}" alt="{{ $cart->name }}" style="width: 30px; height: 30px">
-                <span>{{ strlen($cart->name) > 50 ? substr($cart->name, 0, 50)."..." : $cart->name }}</span>
+                <span>{{ strlen($cart->name) > 25 ? substr($cart->name, 0, 25)."..." : $cart->name }}</span>
             </div>
             <div class="cart-content" style="color: orangered;  float: right">
                 <span>{{ $cart->price }} đ x {{ $cart->pivot->quantity }}</span>
@@ -64,18 +64,24 @@
         var quantity = parseInt($(this).siblings("input[name='quantity']").val());
         console.log(quantity);
         var token = $("meta[name='_token']").attr('content');
+        $('.loading').show();
         $.ajax({
             url: "/cart",
             method: "POST",
             data: {id: id, _method: "delete", _token: token},
             success: function (result) {
                 element.parents('.cart-info').remove();
-                count(0);
                 $('#cartSizeInput').val(parseInt($('#cartSizeInput').val()) - quantity);
                 $('#cart-sum-product').text($('#cartSizeInput').val());
+                $('#cartSize').val(0);
                 cartSize();
+                $('.loading').hide();
+                return count(0);
+            },
+            error: function (xhr, status, error) {
+                alert("Lỗi");
+                $('.loading').hide();
             }
         });
-
     });
 </script>

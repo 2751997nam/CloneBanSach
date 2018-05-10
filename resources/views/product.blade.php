@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="product-search-items">
-
+            {{--@include('showsearch')--}}
         </div>
     </div>
 
@@ -89,12 +89,18 @@
             }).get();
             if(categories.length !== 0) {
                 state = false;
+                $('.loading').show();
                 $.ajax({
                     url: "product/show-search",
                     method: "GET",
-                    data: {search:categories},
+                    data: {searchCate:categories},
                     success: function (result) {
                         $(".product-search-items").html(result);
+                        $('.loading').hide();
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                        $('.loading').hide();
                     }
                 });
             }else {
@@ -111,6 +117,7 @@
         function ajaxLoad(filename, content, notSearch) {
             content = typeof content !== 'undefined' ? content : '.product-search-items';
             notSearch = typeof notSearch !== 'undefined' ? notSearch : false;
+            $('.loading').show();
             $.ajax({
                 type: "GET",
                 url: filename,
@@ -118,9 +125,11 @@
                 contentType: false,
                 success: function (data) {
                     $(content).html(data);
+                    $('.loading').hide();
                 },
                 error: function (xhr, status, error) {
                     alert(xhr.responseText);
+                    $('.loading').hide();
                 }
             });
         }

@@ -67,6 +67,7 @@ function addToCart(user_id, book_id, url, bookQuantity, token) {
 
     }
     else
+        $('.loading').show();
         $.ajax({
             url: url,
             method: "POST",
@@ -76,11 +77,17 @@ function addToCart(user_id, book_id, url, bookQuantity, token) {
                 a = a + quantity;
                 $('#cartSize').val(a);
                 $('.cart-dropdown-menu').html(result);
+                $('.loading').hide();
                 alert('Thêm Sản Phẩm Thành Công');
             },
             complete: function () {
                 $('#addToCart').prop('disabled', false);
                 // $("#addToCart").bind('click', addToCart);
+
+            },
+            error: function (xhr, status, error) {
+                alert("Lỗi");
+                $('.loading').hide();
             }
         });
 }

@@ -2,7 +2,7 @@
 <div class="show-product">
     <div class="product" >
         <div class="product-list">
-            @foreach($books as $book)
+            @forelse($books as $book)
                 <div class="book">
                     <a href="{{ url('product/show/'.$book->id) }}">
                     <img src="{{ \Illuminate\Support\Facades\Storage::url($book->img) }}" alt="{{ $book->name }}" width="190" height="190">
@@ -14,7 +14,7 @@
                     @endif
                     <div class="book-details" style="padding: 5%">
                         <div style="height: 45px; float: top">
-                            {{ strlen($book->name) > 45?substr($book->name,0, 45)."...":$book->name }}
+                            {{ strlen($book->name) > 30?substr($book->name,0, 30)."...":$book->name }}
                         </div>
                         <div style="float: bottom">
                                 <span>
@@ -71,7 +71,11 @@
                     </div>
                     </a>
                 </div>
-            @endforeach
+            @empty
+                <div style="width: 100%">
+                    <span>Không Tìm Thấy</span>
+                </div>
+            @endforelse
 
         </div>
     </div>

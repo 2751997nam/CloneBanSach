@@ -9,7 +9,7 @@
             <th class="col-md-2">Thể Loại:</th>
             <td>
                 @foreach($book->categories as $cate)
-                    <span>{{ $cate->name }}</span>
+                    <span style="margin-right: 20px">{{ $cate->name }}</span>
                 @endforeach
             </td>
         </tr>

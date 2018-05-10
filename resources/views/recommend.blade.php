@@ -4,7 +4,7 @@
         <span><a href="javascript:void(0)" style="float: right; color: #f74d18">Xem Tất Cả ></a></span>
     </div>
     <div class="recomend-body border-top">
-        @foreach($books as $book)
+        @foreach($recommendBooks as $book)
             <div class="book" >
                 <a href="{{ url('/product/show/'. $book->id) }}">
                 <img src="{{ \Illuminate\Support\Facades\Storage::url($book->img) }}" alt="{{ $book->name }}" width="190" height="190">
@@ -16,7 +16,7 @@
                 @endif
                 <div class="book-details" style="padding: 5%">
                     <div style="height: 45px; float: top">
-                        {{ strlen($book->name) > 45?substr($book->name,0, 45)."...":$book->name }}
+                        {{ strlen($book->name) > 30?substr($book->name,0, 30)."...":$book->name }}
                     </div>
                     <div style="float: bottom">
                         <span>

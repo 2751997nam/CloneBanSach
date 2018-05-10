@@ -155,6 +155,7 @@
             }
         });
         function updateToDatabase(book_id, user_id, quantity) {
+            $('.loading').show();
             $.ajax({
                 url: "{{ route('cart.update') }}",
                 method: "POST",
@@ -162,6 +163,11 @@
                     _token: "{{ csrf_token()}}",  _method: "PUT" },
                 success: function (result) {
                     $('.cart-dropdown-menu').html(result);
+                    $('.loading').hide();
+                },
+                error: function (xhr, status, error) {
+                    alert("Lỗi");
+                    $('.loading').hide();
                 }
             });
         }
@@ -208,6 +214,7 @@
         })
         
         function deleteCart(element, cart_id) {
+            $('.loading').show();
             $.ajax({
                 url: "{{ route('cart.destroy') }}",
                 method: "POST",
@@ -216,6 +223,11 @@
                     $(element).parents('tr').remove();
                     $('.cart-dropdown-menu').html(result);
                     sumUpQuantity();
+                    $('.loading').hide();
+                },
+                error: function (xhr, status, error) {
+                    alert("Lỗi");
+                    $('.loading').hide();
                 }
             })
         }
