@@ -85,10 +85,12 @@ class OrderController extends Controller
     {
         $this->addSession($request);
         $orders = new Order();
+        $paginate = 20;
         $orders = Order::with('order_items')
             ->whereNotIn('orders.id', Bill::where('was_paid', '=', '1')->pluck('order_id'))
             ->where('name', 'like', '%'.$request->session()->get('search').'%')
-            ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate(20);
+            ->orWhere('user_id', '=', $request->session()->get('search'))
+            ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate($paginate);
         $page = $orders->currentPage();
 //        return $orders;
 
@@ -96,9 +98,9 @@ class OrderController extends Controller
             ->where('position_id', '=', '3')->orderBy('employee_code')->get();
 //        return $employees;
         if($request->ajax()) {
-            return view('order.index', compact('orders', 'page', 'employees'));
+            return view('order.index', compact('orders', 'page', 'employees', 'paginate'));
         }else {
-            return view('order.ajax', compact('orders', 'page', 'employees'));
+            return view('order.ajax', compact('orders', 'page', 'employees', 'paginate'));
         }
     }
 

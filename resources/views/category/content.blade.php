@@ -1,5 +1,5 @@
 
-<div class="container">
+
     <div class="row">
         <div class="col-md-7">
             Categories Manager
@@ -21,7 +21,7 @@
         </thead>
         <tbody>
         @php
-            $i = 1 + ($page - 1) * 5;
+            $i = 1 + ($page - 1) * $paginate;
         @endphp
         @forelse($categories as $category)
             <tr>
@@ -48,4 +48,3 @@
     <ul class="paginate">
         {{ $categories->links() }}
     </ul>
-</div>

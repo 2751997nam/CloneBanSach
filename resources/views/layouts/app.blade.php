@@ -16,7 +16,7 @@
 </head>
 <body>
 <nav class="navbar fixed-top bg-info"  style="margin-bottom: 0;">
-    <a class="navbar-brand" href="/book"><img src="logo_2.png" alt="logo" style="width: 33px"></a>
+    <a class="navbar-brand" href="{{ route('admin.index') }}"><img src="logo_2.png" alt="logo" style="width: 33px"></a>
     @yield('nav')
 </nav>
 @yield('content')

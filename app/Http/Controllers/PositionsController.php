@@ -38,14 +38,16 @@ class PositionsController extends Controller
     {
         $this->addSession($request);
         $positions = new Position();
+        $paginate = 10;
         $positions = $positions->where('name', 'like', '%'.$request->session()->get('search').'%')
-            ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate(5);
+            ->orWhere('position_code', 'like', '%'.$request->session()->get('search').'%')
+            ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate($paginate);
         $page = $positions->currentPage();
 
         if($request->ajax()){
-            return view('positions.index', compact('positions', 'page'));
+            return view('positions.index', compact('positions', 'page', 'paginate'));
         }else{
-            return view('positions.ajax', compact('positions', 'page'));
+            return view('positions.ajax', compact('positions', 'page', 'paginate'));
         }
     }
 

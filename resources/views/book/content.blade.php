@@ -1,5 +1,5 @@
 
-    <div class="container">
+
         <div class="row">
             <div class="col-md-7">
                 Quản Lý Sách
@@ -50,7 +50,7 @@
             </thead>
             <tbody>
             @php
-                $i = 1 + ($page - 1) * 5;
+                $i = 1 + ($page - 1) * $paginate;
             @endphp
             @forelse($books as $book)
                 @php($cates = $book->Categories()->get()->pluck('name'))
@@ -94,4 +94,3 @@
         <ul class="paginate">
             {{ $books->links() }}
         </ul>
-</div>

@@ -37,17 +37,17 @@ Route::get('/', function () {
     return view('welcome', compact('carouselBooks', 'recommendBooks', 'user', 'carts', 'carousel_name'));
 })->name('index');
 
-Route::resource('/book', 'BookController')->middleware('auth');
+Route::resource('/book', 'BookController')->middleware(['auth', 'level']);
 
-Route::resource('/categories', 'CategoriesController')->middleware('auth');
+Route::resource('/categories', 'CategoriesController')->middleware(['auth', 'level']);
 
-Route::resource('/employees', 'EmployeesController')->middleware('auth');
+Route::resource('/employees', 'EmployeesController')->middleware(['auth', 'level']);
 
-Route::resource('/positions', 'PositionsController')->middleware( 'auth');
+Route::resource('/positions', 'PositionsController')->middleware( ['auth', 'level']);
 
-Route::resource('/users', 'UserController')->middleware( 'auth');
+Route::resource('/users', 'UserController')->middleware( ['auth', 'level']);
 
-Route::group(['prefix' => '/book_user', 'as' => 'book_user.'], function () {
+Route::group(['prefix' => '/book_user', 'as' => 'book_user.', 'middleware' => ['auth', 'level']], function () {
     Route::post('/', 'Book_userController@store')->name('store');
     Route::put('/', 'Book_userController@update')->name('update');
     Route::delete('/', 'Book_userController@destroy')->name('destroy');
@@ -60,17 +60,17 @@ Route::group(['prefix' => 'product', 'as' => 'product.'], function (){
     Route::get('/show-search/', 'ProductController@showsearch')->name('search');
 
     Route::get('/show/{id}', 'ProductController@show')->name('show');
-    Route::get('/comment/{id}/', 'ProductController@showComment')->name('commnet');
+    Route::get('/comment/{id}/', 'ProductController@showComment')->name('comment');
     Route::get('/description/{id}/', 'ProductController@showDescription')->name('description');
 });
 
-Route::group(['prefix' => 'cart', 'as' => 'cart.', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'cart', 'as' => 'cart.', 'middleware' => ['auth']], function () {
     Route::get('/', 'CartController@index')->name('index');
     Route::get('/dropdowncart', 'CartController@dropdowncart')->name('dropdowncart');
     Route::put('/update', 'CartController@update')->name('update');
     Route::delete('/', 'CartController@destroy')->name('destroy');
 });
-Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['auth', 'level']], function() {
     Route::get('/account', 'UserController@account')->name('account');
     Route::get('/profile', 'UserController@profile')->name('profile');
     Route::get('/order', 'UserController@order')->name('order');
@@ -80,12 +80,15 @@ Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'auth'], func
     Route::get('/showOptionOrder/{status}', 'OrderController@showOptionOrder')->name('showOptionOrder');
 });
 //Route::resource('/order', 'OrderController')->middleware('auth');
-Route::group(['prefix' => 'order', 'as' => 'order.', 'middleware' => 'auth'], function () {
-    Route::get('', 'OrderController@index')->name('index');
+Route::group(['prefix' => 'order', 'as' => 'order.', 'middleware' => ['auth', 'level']], function () {
+    Route::get('/', 'OrderController@index')->name('index');
     Route::get('/create', 'OrderController@create')->name('create');
     Route::post('/store', 'OrderController@store')->name('store');
     Route::delete('/destroy', 'OrderController@destroy')->name('destroy');
 });
 
-Route::resource('/bills', 'BillController')->middleware('auth');
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'level']], function () {
+    Route::get('/', 'AdminController@index')->name('index');
+});
+Route::resource('/bills', 'BillController')->middleware(['auth', 'level']);
 Auth::routes();

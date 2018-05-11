@@ -39,17 +39,19 @@ class EmployeesController extends Controller
     {
         $this->addSession($request);
 //        return session()->all();
+        $paginate = 15;
         $employees = DB::table('users')->join('employees', 'users.id', '=', 'employees.id')
             ->join('positions', 'employees.position_id', '=', 'positions.id')
             ->select('users.id', 'users.name as fullname',
                 'users.email','employees.employee_code', 'employees.salary_level', 'dob', 'positions.name as position', 'users.updated_at', 'users.created_at')
             ->where('users.name', 'like', '%'.$request->session()->get('search').'%')
-            ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate(5);
+            ->orWhere('employees.employee_code', 'like', '%'.$request->session()->get('search').'%')
+            ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate($paginate);
         $page = $employees->currentPage();
         if($request->ajax()) {
-            return view('employees.index', compact('employees', 'page'));
+            return view('employees.index', compact('employees', 'page', 'paginate'));
         }else {
-            return view('employees.ajax', compact('employees', 'page'));
+            return view('employees.ajax', compact('employees', 'page', 'paginate'));
         }
     }
 

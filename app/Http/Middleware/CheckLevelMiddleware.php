@@ -18,6 +18,7 @@ class CheckLevelMiddleware
     {
         if(Auth::check()) {
             $user = Auth::user();
+            if($user->is_customer == 1) return redirect()->route('index');
         }else return redirect()->route('index');
         return $next($request);
     }

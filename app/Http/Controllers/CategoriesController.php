@@ -37,14 +37,15 @@ class CategoriesController extends Controller
     {
         $this->addSession($request);
         $categories = new Category();
+        $paginate = 10;
         $categories = $categories->where('name', 'like', '%'.$request->session()->get('search').'%')
-            ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate(5);
+            ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate($paginate);
         $page = $categories->currentPage();
 
         if($request->ajax()){
-            return view('category.index', compact('categories', 'page'));
+            return view('category.index', compact('categories', 'page', 'paginate'));
         }else{
-            return view('category.ajax', compact('categories', 'page'));
+            return view('category.ajax', compact('categories', 'page', 'paginate'));
         }
     }
 

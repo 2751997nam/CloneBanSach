@@ -1,5 +1,5 @@
 
-<div class="container">
+
     <div class="row">
         <div class="col-md-7">
             Quản Lý Đơn Hàng
@@ -32,7 +32,7 @@
         </thead>
         <tbody>
         @php
-            $i = 1 + ($page - 1) * 5;
+            $i = 1 + ($page - 1) * $paginate;
         @endphp
         @forelse($orders as $order)
             <tr>
@@ -147,4 +147,3 @@
     <ul class="paginate">
         {{ $orders->links() }}
     </ul>
-</div>

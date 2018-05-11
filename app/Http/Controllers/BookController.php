@@ -34,14 +34,16 @@ class BookController extends Controller
     {
         $this->addSession($request);
         $books = new Book();
+        $paginate = 10;
         $books = $books->where('name', 'like', '%'.$request->session()->get('search').'%')
-        ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate(5);
+            ->orWhere('book_code', 'like', '%'.$request->session()->get('search').'%')
+        ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate($paginate);
 
         $page = $books->currentPage();
         if($request->ajax()) {
-            return view('book.index', compact('books', 'page'));
+            return view('book.index', compact('books', 'page', 'paginate'));
         }else {
-            return view('book.ajax', compact('books', 'page'));
+            return view('book.ajax', compact('books', 'page', 'paginate'));
         }
     }
 

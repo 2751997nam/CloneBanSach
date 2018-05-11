@@ -49,7 +49,7 @@ class LoginController extends Controller
             $user = Auth::user();
             if($user->is_customer === 1)
                 return redirect($this->redirectTo);
-            else return redirect()->route('book.index');
+            else return redirect()->route('admin.index');
         }
         else {
             redirect()->route('login');

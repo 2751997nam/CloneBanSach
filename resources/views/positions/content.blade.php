@@ -1,5 +1,5 @@
 
-<div class="container">
+
     <div class="row">
         <div class="col-md-7">
             Positions Manager
@@ -27,7 +27,7 @@
         </thead>
         <tbody>
         @php
-            $i = 1 + ($page - 1) * 5;
+            $i = 1 + ($page - 1) * $paginate;
         @endphp
         @forelse($positions as $position)
             <tr>
@@ -56,4 +56,3 @@
     <ul class="paginate">
         {{ $positions->links() }}
     </ul>
-</div>

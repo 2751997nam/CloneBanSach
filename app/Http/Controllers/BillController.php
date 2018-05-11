@@ -46,18 +46,20 @@ class BillController extends Controller
 //                              group by `order_id`');
 //        return $orders;
 
-
+        $paginate = 20;
         $bills = $bills->leftjoin(DB::raw('(select `order_id`, SUM( `order_items`.`price` * `order_items`.`quantity` * (100 - `order_items`.`discount`) / 100) as `total` 
                               from `order_items` 
-                              group by `order_id`) as totals'), 'bills.order_id' , '=' , 'totals.order_id')->where('bill_code', 'like', '%'.$request->session()->get('search').'%')
-                ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate(20);
+                              group by `order_id`) as totals'), 'bills.order_id' , '=' , 'totals.order_id')
+            ->where('bill_code', 'like', '%'.$request->session()->get('search').'%')
+            ->orWhere('employee_code', 'like', '%'.$request->session()->get('search').'%')
+                ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate($paginate);
 //        return $bills;
 
         $page = $bills->currentPage();
         if($request->ajax()) {
-            return view('bill.index', compact('bills', 'page'));
+            return view('bill.index', compact('bills', 'page', 'paginate'));
         }else {
-            return view('bill.ajax', compact('bills', 'page'));
+            return view('bill.ajax', compact('bills', 'page', 'paginate'));
         }
     }
 

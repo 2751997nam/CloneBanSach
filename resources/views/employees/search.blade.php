@@ -4,7 +4,7 @@
             <input class="form-control" id="search"
                    value="{{ request()->session()->get('search') }}"
                    onkeydown="if (event.keyCode == 13) ajaxLoad('{{url('employees')}}?search='+this.value)"
-                   placeholder="Search Name" name="search"
+                   placeholder="Search Employee Name Or Employee Code" name="search"
                    type="text"/>
             <div class="input-group-btn">
                 <button type="submit" class="btn btn-primary"
