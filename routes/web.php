@@ -91,4 +91,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'l
     Route::get('/', 'AdminController@index')->name('index');
 });
 Route::resource('/bills', 'BillController')->middleware(['auth', 'level']);
+
+Route::group(['prefix' => 'verify', 'as' => 'verify.'], function () {
+    Route::get('/{email}/{verifyToken}', 'Auth\RegisterController@verifyEmailDone')->name('verifyEmailDone');
+    Route::get('/resendVerify', 'Auth\LoginController@resendVerifyView')->name('resendVerifyView');
+    Route::post('/resendVerifyEmail', 'Auth\LoginController@resendVerifyEmail')->name('resendVerifyEmail');
+});
+
 Auth::routes();

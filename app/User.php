@@ -17,7 +17,7 @@ class User extends Authenticatable
     protected $table = "users";
 
     protected $fillable = [
-        'name', 'email', 'password', 'remember_token', 'is_customer', 'created_at', 'updated_at'
+        'name', 'email', 'password', 'remember_token', 'is_customer', 'verifyToken', 'status', 'created_at', 'updated_at'
     ];
 
     /**
@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'verifyToken'
     ];
 
     public function employee() {
@@ -43,5 +43,9 @@ class User extends Authenticatable
 
     public function information() {
         return $this->hasOne(User_information::class);
+    }
+
+    public function verified() {
+        return $this->status == 1;
     }
 }

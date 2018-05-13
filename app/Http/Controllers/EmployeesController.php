@@ -92,6 +92,7 @@ class EmployeesController extends Controller
         $d = implode('', explode('-', $request->dob));
         $user->password = Hash::make($d);
         $user->is_customer = 0;
+        $user->status = 1;
         try{
             $user->save();
         }catch (Exception $e) {

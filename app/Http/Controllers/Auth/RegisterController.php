@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Mail\VerifyEmail;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -63,10 +68,41 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'verifyToken' => Str::random(40),
         ]);
+        $thisUser = User::findOrFail($user->id);
+        $this->sendEmail($thisUser);
+        return $user;
+    }
+
+    protected function register(Request $request) {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
+
+    protected function sendEmail($thisUser) {
+        Mail::to($thisUser['email'])->send(new VerifyEmail($thisUser));
+    }
+
+    protected function verifyEmailDone($email, $verifyToken) {
+        $user = User::where(['email' => $email, 'verifyToken' => $verifyToken])->first();
+        if($user) {
+            $user->verifyToken = null;
+            $user->status = 1;
+            $user->save();
+//            return $user;
+            return redirect()->route('login');
+        }else {
+            return "Không thể tìm thấy tài khoản này!";
+        }
     }
 }

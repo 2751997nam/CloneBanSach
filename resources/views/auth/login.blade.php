@@ -106,12 +106,17 @@
             </svg>
         </div>
     </div>
-
+    <div style="margin-bottom: 10px">
+    @if($errors->has('verified'))
+        <span style="color: red">{{ $errors->first('verified') }}</span>
+        <p><a href="{{ route('verify.resendVerifyView') }}">Gửi lại link xác nhận</a></p>
+    @endif
+    </div>
     <div class="inputGroup inputGroup1">
         <label for="email1">Email</label>
         <input type="email" id="email" name="email" class="email" maxlength="256"/>
         <p class="helper helper1">email@domain.com</p>
-        <span class="indicator" style="color: red">{{ $errors->has('email') || $errors->has('password') ? "Sai Email Hoặc Password" : "" }}</span>
+        <span class="indicator" style="color: red">{{ $errors->has('email') ? "Sai Email Hoặc Password" : "" }}</span>
     </div>
     <div class="inputGroup inputGroup2">
         <label for="password">Password</label>
