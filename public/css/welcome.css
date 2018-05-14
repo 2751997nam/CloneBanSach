@@ -1,5 +1,6 @@
-.carousel {
+.carousel.slide {
     width: 1200px;
+    height: 360px;
 }
 
 .carousel-control {

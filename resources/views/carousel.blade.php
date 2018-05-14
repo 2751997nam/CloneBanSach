@@ -4,33 +4,26 @@
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
 
         <div class="item active">
-            <img src="images/slide1.png" alt="Los Angeles" style="width:100%;">
-            <div class="carousel-caption">
-                <h3>Los Angeles</h3>
-                <p>LA is always so much fun!</p>
-            </div>
+            <img src="images/slide1.png" alt="Slide 1" style="width:100%;">
         </div>
 
         <div class="item">
-            <img src="images/slide2.jpg" alt="Chicago" style="width:100%;">
-            <div class="carousel-caption">
-                <h3>Chicago</h3>
-                <p>Thank you, Chicago!</p>
-            </div>
+            <img src="images/slide2.jpg" alt="Slide 2" style="width:100%;">
         </div>
 
         <div class="item">
-            <img src="images/slide3.jpg" alt="New York" style="width:100%;">
-            <div class="carousel-caption">
-                <h3>New York</h3>
-                <p>We love the Big Apple!</p>
-            </div>
+            <img src="images/slide3.png" alt="Slide 3" style="width:100%;">
+        </div>
+
+        <div class="item">
+            <img src="images/slide4.jpg" alt="Slide 4" style="width:100%;">
         </div>
 
     </div>
