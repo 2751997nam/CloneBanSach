@@ -17,7 +17,7 @@
 
 <div class="row row-offcanvas row-offcanvas-left active">
     <!-- sidebar -->
-    <div class="column col-sm-3 col-xs-1 sidebar-offcanvas" id="sidebar">
+    <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
         <ul class="nav" id="menu">
             <li class="menu-items {{ isset($books) ? "chose" : ""}}">
                 <a href="{{ route('book.index') }}" title="books manager">
@@ -48,6 +48,14 @@
                     <div class="item-icon">
                         <img src="{{ asset('/images/admin/position.png') }}" alt="positions">
                         <span class="collapse visible-xs">Positions</span>
+                    </div>
+                </a>
+            </li>
+            <li class="menu-items {{ isset($users) ? "chose" : "" }}">
+                <a href="{{ route('users.index') }}" title="customers manager">
+                    <div class="item-icon">
+                        <img src="{{ asset('/images/admin/customer.png') }}" alt="customers">
+                        <span class="collapse visible-xs">Customers</span>
                     </div>
                 </a>
             </li>

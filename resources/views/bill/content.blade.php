@@ -69,6 +69,37 @@
             <tr class="orderDetails" style="display: none;">
                 <td colspan="7"  style="background-color: gainsboro;">
                     <div style="max-height: 500px; overflow-y: auto;">
+                        <?php $order = $bill->order ?>
+                        <table style="width: 100%; margin-bottom: 20px">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50%"></th>
+                                    <th style="width: 50%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="order-info">
+                                        <label for="">User Id: </label>
+                                        <span> {{ $order->user_id }} </span>
+                                    </td>
+                                    <td class="order-info">
+                                        <label for="">Name: </label>
+                                        <span>{{ $order->name }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="order-info">
+                                        <label for="">Email: </label>
+                                        <span>{{ $order->email }}</span>
+                                    </td>
+                                    <td class="order-info">
+                                        <label for="">Address: </label>
+                                        <span>{{ $order->address }}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <table style="width: 100%">
                             <thead>
                             <tr>
@@ -85,7 +116,6 @@
                             <tbody>
                             @php($j = 1)
                             @php($sum = 0)
-                            <?php $order = $bill->order ?>
                             @foreach($order->order_items as $item)
                                 <tr>
                                     <td> {{ $j++ }} </td>

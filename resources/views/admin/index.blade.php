@@ -68,6 +68,16 @@
             </a>
         </div>
         <div class="manager-options">
+            <a href="{{ route('users.index') }}">
+                <div class="manager-options-image">
+                    <img src="{{ asset('/images/admin/customer.png') }}" alt="customers manager">
+                </div>
+                <div class="manager-options-title">
+                    <span>Customers Manager</span>
+                </div>
+            </a>
+        </div>
+        <div class="manager-options">
             <a href="{{ route('order.index') }}">
                 <div class="manager-options-image">
                     <img src="{{ asset('/images/admin/order.png') }}" alt="orders manager">

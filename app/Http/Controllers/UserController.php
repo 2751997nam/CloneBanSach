@@ -47,9 +47,43 @@ class UserController extends Controller
         return view('user.profile', compact('user', 'information'));
     }
 
-    public function index()
+    public function addSession(Request $request) {
+        //        session()->flush();
+        $check = ['id', 'name', 'email', 'phone', 'gender', 'dob', 'status', 'created_at', 'updated_at'];
+        if(session()->has('field') && !in_array(session()->get('field'), $check)) session()->forget('field');
+        if(session()->has('search') && !in_array(session()->get('search'), $check)) session()->forget('search');
+
+        $request->session()->flash('search', $request
+            ->has('search') ? $request->get('search') : ($request->session()
+            ->has('search') ? $request->session()->get('search') : ''));
+
+        $request->session()->flash('field', $request
+            ->has('field') ? $request->get('field') : ($request->session()
+            ->has('field') ? $request->session()->get('field') : 'updated_at'));
+
+        $request->session()->flash('sort', $request
+            ->has('sort') ? $request->get('sort') : ($request->session()
+            ->has('sort') ? $request->session()->get('sort') : 'asc'));
+    }
+
+    public function index(Request $request)
     {
-        //
+        $this->addSession($request);
+        $paginate = 15;
+        $users = User::with('information')
+                    ->where('name', 'like', '%'.$request->session()->get('search').'%')
+                    ->where(['is_customer' => 1])
+                    ->orWhere('email', 'like', '%'.$request->session()->get('search').'%')
+                    ->where(['is_customer' => 1])
+                    ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate($paginate);
+//        return $users;
+        $page = $users->currentPage();
+
+        if($request->ajax()){
+            return view('user.index', compact('users', 'page', 'paginate'));
+        }else{
+            return view('user.ajax', compact('users', 'page', 'paginate'));
+        }
     }
 
     /**
@@ -207,6 +241,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect('users');
     }
 }

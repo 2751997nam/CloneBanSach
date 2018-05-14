@@ -90,6 +90,7 @@ Route::group(['prefix' => 'order', 'as' => 'order.', 'middleware' => ['auth', 'l
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'level']], function () {
     Route::get('/', 'AdminController@index')->name('index');
 });
+
 Route::resource('/bills', 'BillController')->middleware(['auth', 'level']);
 
 Route::group(['prefix' => 'verify', 'as' => 'verify.'], function () {
