@@ -33,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = 'registered';
 
     /**
      * Create a new controller instance.
@@ -104,5 +104,10 @@ class RegisterController extends Controller
         }else {
             return "Không thể tìm thấy tài khoản này!";
         }
+    }
+
+    protected function registered()
+    {
+        return view('auth/registered');
     }
 }

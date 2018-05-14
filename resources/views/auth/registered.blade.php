@@ -37,9 +37,10 @@
 </div>
 <div class="container">
     <div style="margin-top: 200px">
-        <div>
+        <div style="text-align: center">
             <h3 style="font-weight: bold">Bạn Đã Đăng Ký Thành Công!</h3>
-            <p>Chúc mừng bạn đã đăng ký thành công. Tuy nhiên bạn cần phải xác nhận email mới có thể đăng nhập. Nhấn nút xác nhận ở dưới để chắc chắn bạn đã đọc thông tin này</p>
+            <p>Chúc mừng bạn đã đăng ký thành công. Tuy nhiên bạn cần phải xác nhận email mới có thể đăng nhập.</p>
+            <p> Nhấn nút xác nhận ở dưới để chắc chắn bạn đã đọc thông tin này.</p>
             <a href="{{ route('index') }}" role="button" class="btn btn-primary">Xác nhận</a>
         </div>
     </div>

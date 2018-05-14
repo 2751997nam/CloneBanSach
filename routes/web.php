@@ -97,5 +97,5 @@ Route::group(['prefix' => 'verify', 'as' => 'verify.'], function () {
     Route::get('/resendVerify', 'Auth\LoginController@resendVerifyView')->name('resendVerifyView');
     Route::post('/resendVerifyEmail', 'Auth\LoginController@resendVerifyEmail')->name('resendVerifyEmail');
 });
-
+Route::get('/registered', 'Auth\RegisterController@registered')->name('registerd');
 Auth::routes();
