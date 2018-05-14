@@ -18,7 +18,6 @@ class CategoriesController extends Controller
         //        session()->flush();
         $check = ['id', 'name', 'created_at', 'updated_at'];
         if(session()->has('field') && !in_array(session()->get('field'), $check)) session()->forget('field');
-        if(session()->has('search') && !in_array(session()->get('search'), $check)) session()->forget('search');
 
         $request->session()->flash('search', $request
             ->has('search') ? $request->get('search') : ($request->session()

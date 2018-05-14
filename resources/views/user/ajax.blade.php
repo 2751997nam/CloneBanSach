@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Employees Manager')
+@section('title', 'Customer Manager')
 @section('css')
     <style>
         .loading {

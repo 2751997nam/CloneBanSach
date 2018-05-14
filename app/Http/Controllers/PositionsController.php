@@ -19,7 +19,6 @@ class PositionsController extends Controller
         //        session()->flush();
         $check = ['id', 'position_code', 'name', 'base_salary_level', 'created_at', 'updated_at'];
         if(session()->has('field') && !in_array(session()->get('field'), $check)) session()->forget('field');
-        if(session()->has('search') && !in_array(session()->get('search'), $check)) session()->forget('search');
 
         $request->session()->flash('search', $request
             ->has('search') ? $request->get('search') : ($request->session()
