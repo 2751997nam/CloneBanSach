@@ -17,8 +17,10 @@
 <body>
 
 <div class="main">
+    <div style="margin: auto">
     @include('navbar')
-    <div class="container">
+    </div>
+    <div class="container" style="margin: auto">
     @yield('content')
     </div>
     <div class="loading">

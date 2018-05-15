@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 <div class="footer">
-    <div class="container">
+    <div class="container" style="margin: auto">
         <div class="footer-category-list-column">
             <div class="footer-category-list-header">
                 Chăm Sóc Khách Hàng

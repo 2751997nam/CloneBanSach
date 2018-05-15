@@ -15,11 +15,16 @@
 
 </head>
 <body>
-<nav class="navbar fixed-top bg-info"  style="margin-bottom: 0;">
+<nav class="navbar fixed-top bg-info"  style="width: 1600px; margin: auto">
     <a class="navbar-brand" href="{{ route('admin.index') }}"><img src="logo_2.png" alt="logo" style="width: 33px"></a>
+    <div style="display: table-cell; height: 50px; vertical-align: middle;">
+        <p style="margin: 0">Xin Chào {{ \Illuminate\Support\Facades\Auth::user()->name }}!</p>
+    </div>
     @yield('nav')
 </nav>
+<div style="margin: auto; width: 1600px">
 @yield('content')
+</div>
 <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
 <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
 @yield('script')

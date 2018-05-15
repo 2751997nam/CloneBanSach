@@ -26,7 +26,7 @@
     </style>
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container" style="margin-top: 50px">
         <div class="manager-options">
             <a href="{{ route('book.index') }}">
                 <div class="manager-options-image">
