@@ -25,7 +25,7 @@ class Employee extends Model
     }
 
     public function position() {
-        return $this->belongsToMany('App\Position');
+        return $this->belongsTo('App\Position');
     }
 
 

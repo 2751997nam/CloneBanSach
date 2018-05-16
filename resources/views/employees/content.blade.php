@@ -6,6 +6,9 @@
         </div>
         @include('employees.search')
     </div>
+    <div>
+        <button class="btn btn-primary" onclick="window.location.href='{{ route('pdf.employees') }}'">Xuất Bảng Lương</button>
+    </div>
     <table class="table" style="table-layout: fixed; ">
         <thead>
         <tr>

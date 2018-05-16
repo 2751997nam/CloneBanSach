@@ -56,6 +56,9 @@
                     <a class="btn btn-primary btn-xs detail" role="button" title="Details"
                        href="javascript:void(0)">
                         Details</a>
+                    <a class="btn btn-success btn-xs detail" role="button" title="Details"
+                       href="{{ route('pdf.bill', ['bill_code' => $bill->bill_code]) }}">
+                        Export</a>
                     <button class="btn btn-warning btn-xs edit" title="Edit">
                         Edit</button>
                     <input type="hidden" name="_method" value="delete"/>
@@ -80,6 +83,8 @@
                             <tbody>
                                 <tr>
                                     <td class="order-info">
+                                        <label for="">Order Id: </label>
+                                        <span style="margin-right: 150px"> {{ $bill->order_id }} </span>
                                         <label for="">User Id: </label>
                                         <span> {{ $order->user_id }} </span>
                                     </td>

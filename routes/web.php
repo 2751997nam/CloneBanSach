@@ -43,6 +43,11 @@ Route::resource('/categories', 'CategoriesController')->middleware(['auth', 'lev
 
 Route::resource('/employees', 'EmployeesController')->middleware(['auth', 'level']);
 
+Route::group(['prefix' => '/pdf', 'as' => 'pdf.', 'middleware' => ['auth', 'level']], function () {
+    Route::get('/employees', 'PdfController@employees')->name('employees');
+    Route::get('/bill/{bill_code}', 'PdfController@bill')->name('bill');
+});
+
 Route::resource('/positions', 'PositionsController')->middleware( ['auth', 'level']);
 
 Route::resource('/users', 'UserController')->middleware( ['auth', 'level']);
