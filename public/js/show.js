@@ -45,7 +45,10 @@ function outOfStock(quantity) {
 function bookDetailOption(element, page) {
     element.siblings('.book-detail-options').removeClass('chose');
     element.addClass('chose');
-    $('#showBookDetailOption').load(page);
+    ajaxLoad(page, "showBookDetailOption")
+    // $('#showBookDetailOption').load(page, function () {
+    //     $('.loading').hide();
+    // });
 }
 
 function addToCart(user_id, book_id, url, bookQuantity, token) {

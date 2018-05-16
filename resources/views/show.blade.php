@@ -163,9 +163,9 @@
         @endif
 
 
-
         $(document).ready(function () {
-            $('#showBookDetailOption').load('/product/description/'+ '{{ $book->id }}');
+            {{--$('#showBookDetailOption').load('/product/description/'+ '{{ $book->id }}');--}}
+            bookDetailOption($('#showBookDetailOption'), '/product/description/' + '{{ $book->id }}');
             inputQuantity('{{ $book->quantity }}');
         });
 

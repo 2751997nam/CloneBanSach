@@ -54,7 +54,7 @@
                 <a href="javascript:void(0)" class="hot-words-items">aaaa</a>
             </div>
         </div>
-        <div class="cart-dropdown">
+        <div class="cart-dropdown" role="button">
             <img src="{{ url('images/cart.png') }}" alt="cart" class="cart-dropdown-hover">
             <div id="cartSize">
                 <span style="color: orangered"></span>
@@ -74,5 +74,10 @@
     $(document).ready(function () {
         $('.cart-dropdown-menu').load('/cart/dropdowncart')
     })
+    @if( !\Illuminate\Support\Facades\Auth::check())
+    $('.cart-dropdown').click(function () {
+        $(location).attr('href', '{{ route('login') }}');
+    });
+    @endif
 
 </script>
