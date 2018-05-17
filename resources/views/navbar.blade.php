@@ -17,8 +17,8 @@
                         <div class="account" >
                         <li class="navbar-link" id="loggedIn"><a href="javascript:void(0)"><strong>{{ strlen($user->name) > 25 ? substr($user->name,0, 25)."..." : $user->name }}</strong></a></li>
                             <div class="account-dropdown">
-                                <a href="{{ route('user.order') }}"><li>Đơn Hàng</li></a>
-                                <a href="{{ route('user.account') }}"><li>Tài Khoản Của Tôi</li></a>
+                                <a href="{{ route('user.showOrder') }}"><li>Đơn Hàng</li></a>
+                                <a href="{{ route('user.profile') }}"><li>Tài Khoản Của Tôi</li></a>
                                 <a href="javascript:document.getElementById('logout').submit()" style="color: #2aabd2"><li>Đăng Xuất</li></a>
                             </div>
                         </div>

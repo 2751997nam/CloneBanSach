@@ -1,29 +1,37 @@
-<style>
-    #showOptionOrder {
-        background-color: white;
-        box-shadow: 0 1px 1px 0 rgba(0,0,0,.05);
-        padding:0px 15px
+@extends('layouts.user')
 
-    }
-    #orderOptions {
-        border-radius: 2px;
-        background-color: white;
-        margin-bottom: 10px;
-        box-shadow: 0 1px 1px 0 rgba(0,0,0,.05);
-    }
-    .orderOption {
-        padding: 1%;
-        text-align: center;
-        width: 33%;
-        display: inline-block;
-    }
-    .orderOption.chose{
-        border-bottom: 2px solid orangered;
-    }
-    .orderOption strong {
-        color: orangered;
-    }
-</style>
+@section('title', 'Thông tin đơn hàng')
+
+@section('style')
+    <style>
+        #showOptionOrder {
+            background-color: white;
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.05);
+            padding:0px 15px
+
+        }
+        #orderOptions {
+            border-radius: 2px;
+            background-color: white;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.05);
+        }
+        .orderOption {
+            padding: 1%;
+            text-align: center;
+            width: 33%;
+            display: inline-block;
+        }
+        .orderOption.chose{
+            border-bottom: 2px solid orangered;
+        }
+        .orderOption strong {
+            color: orangered;
+        }
+    </style>
+@endsection
+
+@section('usercontent')
 <div id="orderOptions">
     <div class="orderOption chose" role="button" id="waitting">
         <strong>Chờ Lấy Hàng</strong>
@@ -38,6 +46,9 @@
 <div id="showOptionOrder" >
 
 </div>
+@endsection
+
+@section('script')
 <script>
     $(document).ready(function () {
         $('#showOptionOrder').load('./showOptionOrder/waitting');
@@ -66,3 +77,4 @@
 
 
 </script>
+@endsection

@@ -78,7 +78,7 @@ Route::group(['prefix' => 'cart', 'as' => 'cart.', 'middleware' => ['auth']], fu
 Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['auth', 'level']], function() {
     Route::get('/account', 'UserController@account')->name('account');
     Route::get('/profile', 'UserController@profile')->name('profile');
-    Route::get('/order', 'UserController@order')->name('order');
+//    Route::get('/order', 'UserController@order')->name('order');
     Route::get('/showOrder', 'OrderController@showUserOrder')->name('showOrder');
     Route::get('/changepassword', 'UserController@changePassword')->name('changePassword');
     Route::put('/storepassword', 'UserController@storePassword')->name('storePassword');

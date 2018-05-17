@@ -17,28 +17,29 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function order() {
-        session()->flash('page', '/user/showOrder');
-        $user = Auth::user();
-        return view('user.account', compact('user'));
-    }
-    public function account() {
-        if(session()->has('page')) {
-            if(strcmp(session()->get('page'), "/user/changepassword") !== 0 ) {
-                session()->forget('oldPassword');
-                session()->forget('newPassword');
-                session()->forget('comfirmPassword');
-            }
-        }
-        else {
-            session()->flash('page', '/user/profile');
-            session()->forget('oldPassword');
-            session()->forget('newPassword');
-            session()->forget('comfirmPassword');
-        }
-        $user = Auth::user();
-        return view('user.account', compact('user'));
-    }
+//    public function order() {
+//        session()->flash('page', '/user/showOrder');
+//        $user = Auth::user();
+//        return view('user.account', compact('user'));
+//    }
+
+//    public function account() {
+//        if(session()->has('page')) {
+//            if(strcmp(session()->get('page'), "/user/changepassword") !== 0 ) {
+//                session()->forget('oldPassword');
+//                session()->forget('newPassword');
+//                session()->forget('comfirmPassword');
+//            }
+//        }
+//        else {
+//            session()->flash('page', '/user/profile');
+//            session()->forget('oldPassword');
+//            session()->forget('newPassword');
+//            session()->forget('comfirmPassword');
+//        }
+//        $user = Auth::user();
+//        return view('user.account', compact('user'));
+//    }
 
     public function profile() {
         $user = Auth::user();
@@ -153,16 +154,16 @@ class UserController extends Controller
             'email' => ['required', 'email',
                 Rule::unique('users')->ignore($id)
             ],
-            'phone' => 'min:10|max:15|phone',
-            'dob' => 'date'
+            'phone' => 'min:10|max:15|phone|nullable',
+            'dob' => 'date|nullable'
         ]);
 //        return $request->all();
+        DB::beginTransaction();
         try {
             $user = User::find($id);
             $info = User_information::where('user_id', '=', $id)->first();
             if ($request->has('name')) $user->name = $request->name;
             if ($request->has('email')) $user->email = $request->email;
-            if ($request->has('passwords')) $user->password = Hash::make($request->password);
             if ($info === null) {
                 $info = new User_information();
             }
@@ -175,10 +176,10 @@ class UserController extends Controller
             DB::commit();
             session()->flash('message', "Thành Công!");
         }catch (\Exception $e) {
-            DB::rollback();
+            DB::rollBack();
             session()->flash('message', "Lỗi!");
         }
-        return redirect()->route('user.account');
+        return redirect()->route('user.profile');
     }
 
     public function changePassword() {
@@ -208,12 +209,12 @@ class UserController extends Controller
             session()->put('comfirmPassword', 'Mật khẩu ít nhất 6 ký tự, tối đa 32 ký tự');
             return redirect()->back();
         }
-        if(!Auth::attempt(['email' => $user->email, 'passwords' => $old])) {
+        if(!Auth::attempt(['email' => $user->email, 'password' => $old])) {
             session()->put('oldPassword', 'Mật khẩu cũ không đúng');
             return redirect()->back();
         }
         if(strcmp($old, $new) == 0) {
-            session()->put('oldPassword', 'Mật khẩu mới không thể giống mật khẩu cũ');
+            session()->put('newPassword', 'Mật khẩu mới không thể giống mật khẩu cũ');
             return redirect()->back();
         }
         if(strcmp($new, $comfirm) != 0) {
@@ -221,17 +222,18 @@ class UserController extends Controller
             session()->put('comfirmPassword', 'Nhập mật khẩu mới giống nhau');
             return redirect()->back();
         }
+        DB::beginTransaction();
         try {
             $user->password = Hash::make($new);
             $user->save();
             DB::commit();
         }catch (\Exception $e) {
-            DB::rollback();
+            DB::rollBack();
             return $e;
         }
         session()->flash('message', 'Đổi mật khẩu thành công');
         session()->flash('page', '/user/profile');
-        return redirect()->route('user.account');
+        return redirect()->route('user.changePassword');
     }
     /**
      * Remove the specified resource from storage.

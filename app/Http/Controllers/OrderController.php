@@ -40,7 +40,7 @@ class OrderController extends Controller
         $page = $orders->currentPage();
         if($page > 1) session()->forget('page');
 //        return $orders;
-        return view('order.showUserOrder', compact('orders'));
+        return view('order.showUserOrder', compact('orders', 'user'));
     }
 
     public function showOptionOrder($status) {
@@ -177,7 +177,7 @@ class OrderController extends Controller
             return redirect()->route('cart.index');
         }
         session()->flash('message', 'Thêm đơn hàng thành công!');
-        return redirect()->route('user.order');
+        return redirect()->route('user.showOrder');
     }
 
     /**

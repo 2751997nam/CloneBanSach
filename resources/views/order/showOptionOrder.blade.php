@@ -96,7 +96,7 @@
                 success: function (result) {
                     // if(result !== "") alert(result);
                     // else element.parents('.order').remove();
-                    $(".content").html(result);
+                    $("body").html(result);
                 }
             });
         }
