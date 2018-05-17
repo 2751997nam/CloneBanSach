@@ -19,7 +19,7 @@
             <th style="vertical-align: middle; width: 150px">
                 Phone
             </th>
-            <th style="vertical-align: middle; width: 150px">Email
+            <th style="vertical-align: middle; width: 250px">Email
 
             </th>
             <th style="vertical-align: middle; width: 150px">Address
@@ -85,11 +85,11 @@
                                 <td>{{ $item->order_id }}</td>
                                 <td>{{ $item->book_code }}</td>
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->price }}</td>
+                                <td>{{ number_format($item->price, 0, ',', '.') }} đ</td>
                                 <td>{{ $item->discount }}</td>
                                 <td>{{ $item->quantity }}</td>
-                                @php($money = round((float)$item->price * (100 - (int)$item->discount)/100 * ((int)$item->quantity), 2))
-                                <td>{{ number_format($money, 2, ',', '.') }} đ</td>
+                                @php($money = round((float)$item->price * (100 - (int)$item->discount)/100 * ((int)$item->quantity), 0))
+                                <td>{{ number_format($money, 0, ',', '.') }} đ</td>
                                 @php($sum += $money)
                                 </tr>
                             @endforeach
@@ -98,7 +98,7 @@
                         <div>
                             <div style="display: inline-block">
                                 <span style="font-size: 18px"><strong>Total: </strong></span>
-                                <span style="color: orangered; font-size: 15px"><strong>{{ number_format($sum, 2, ',', '.') }} đ</strong></span>
+                                <span style="color: orangered; font-size: 15px"><strong>{{ number_format($sum, 0, ',', '.') }} đ</strong></span>
                             </div>
                         </div>
                     </div>

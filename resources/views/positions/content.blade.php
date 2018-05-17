@@ -2,7 +2,7 @@
 
     <div class="row">
         <div class="col-md-7">
-            Positions Manager
+            Quản Lý Chức Vụ
         </div>
         @include('positions.search')
     </div>

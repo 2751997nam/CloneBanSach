@@ -13,12 +13,16 @@
             <th style="vertical-align: middle; width: 100px"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('bills?field=bill_code&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Bill Code</a>
                 {{ request()->session()->get('field')=='bill_code'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
             </th>
-            <th style="vertical-align: middle; width: 150px"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('bills?field=employee_code&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Employee Code</a>
+            <th style="vertical-align: middle; width: 120px"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('bills?field=employee_code&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Employee Code</a>
                 {{ request()->session()->get('field')=='employee_code'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
             </th>
             <th style="vertical-align: middle; width: 100px"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('bills?field=total&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Total</a>
                 {{ request()->session()->get('field')=='total'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
             </th>
+            <th style="vertical-align: middle; width: 100px">Order Id</th>
+            <th style="vertical-align: middle; width: 150px">Customer Name</th>
+            <th style="vertical-align: middle; width: 256px">Email</th>
+            <th style="vertical-align: middle; width: 150px">Address</th>
             <th style="vertical-align: middle; width: 100px"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('bills?field=was_paid&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Was Paid</a>
                 {{ request()->session()->get('field')=='was_paid'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
             </th>
@@ -35,10 +39,15 @@
 
         @forelse($bills as $bill)
             <tr>
+                <?php $order = $bill->order ?>
                 <td style="overflow: hidden">{{ $i++ }}</td>
                 <td style="overflow: hidden">{{ $bill->bill_code }}</td>
                 <td style="overflow: hidden">{{ $bill->employee_code }}</td>
                 <td style="overflow: hidden">{{ $bill->total }}</td>
+                <td>{{ $order->id }}</td>
+                <td>{{ $order->name }}</td>
+                <td>{{ $order->email }}</td>
+                <td>{{ $order->address }}</td>
                 <td style="overflow: hidden" class="was_paid"> {{ $bill->was_paid == 1 ? "Yes" : "No" }}
                 </td>
                 <td style="overflow: hidden; display: none" class="was_paid_change">
@@ -70,21 +79,23 @@
                 </td>
             </tr>
             <tr class="orderDetails" style="display: none;">
-                <td colspan="7"  style="background-color: gainsboro;">
+                <td colspan="11"  style="background-color: gainsboro;">
                     <div style="max-height: 500px; overflow-y: auto;">
-                        <?php $order = $bill->order ?>
                         <table style="width: 100%; margin-bottom: 20px">
                             <thead>
                                 <tr>
-                                    <th style="width: 50%"></th>
-                                    <th style="width: 50%"></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="order-info">
                                         <label for="">Order Id: </label>
-                                        <span style="margin-right: 150px"> {{ $bill->order_id }} </span>
+                                        <span> {{ $bill->order_id }} </span>
+                                    </td>
+                                    <td>
                                         <label for="">User Id: </label>
                                         <span> {{ $order->user_id }} </span>
                                     </td>
@@ -98,6 +109,10 @@
                                         <label for="">Email: </label>
                                         <span>{{ $order->email }}</span>
                                     </td>
+                                    <td>
+                                        <label for="">Phone: </label>
+                                        <span>{{ $order->phone }}</span>
+                                    </td>
                                     <td class="order-info">
                                         <label for="">Address: </label>
                                         <span>{{ $order->address }}</span>
@@ -109,7 +124,6 @@
                             <thead>
                             <tr>
                                 <th  style="vertical-align: middle">STT</th>
-                                <th  style="vertical-align: middle">Order Id</th>
                                 <th style="vertical-align: middle">Book Code</th>
                                 <th style="vertical-align: middle">Name</th>
                                 <th style="vertical-align: middle">Price</th>
@@ -124,14 +138,13 @@
                             @foreach($order->order_items as $item)
                                 <tr>
                                     <td> {{ $j++ }} </td>
-                                    <td>{{ $item->order_id }}</td>
                                     <td>{{ $item->book_code }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->price }}</td>
+                                    <td>{{ number_format($item->price, 0, ',', '.') }} đ</td>
                                     <td>{{ $item->discount }}</td>
                                     <td>{{ $item->quantity }}</td>
-                                    @php($money = round((float)$item->price * (100 - (int)$item->discount)/100 * ((int)$item->quantity), 2))
-                                    <td>{{ number_format($money, 2, ',', '.') }} đ</td>
+                                    @php($money = round((float)$item->price * (100 - (int)$item->discount)/100 * ((int)$item->quantity), 0))
+                                    <td>{{ number_format($money, 0, ',', '.') }} đ</td>
                                     @php($sum += $money)
                                 </tr>
                             @endforeach
@@ -140,7 +153,7 @@
                         <div>
                             <div style="display: inline-block">
                                 <span style="font-size: 18px"><strong>Total: </strong></span>
-                                <span style="color: orangered; font-size: 15px"><strong>{{ number_format($sum, 2, ',', '.') }} đ</strong></span>
+                                <span style="color: orangered; font-size: 15px"><strong>{{ number_format($sum, 0, ',', '.') }} đ</strong></span>
                             </div>
                         </div>
                     </div>

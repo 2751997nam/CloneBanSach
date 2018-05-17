@@ -21,8 +21,8 @@
                     <div style="float: bottom">
                         <span>
                             @php($price = $book->price)
-                            <span style="color: orangered">{{$book->price * (100- $book->discount) / 100}}đ</span>
-                            @if($book->discount > 0)<strike style="color: grey">{{ strlen((string) $price)>7?substr((string)$price, 0, 4)."...":$price }}đ</strike>
+                            <span style="color: orangered">{{ number_format($book->price * (100- $book->discount) / 100, 0, ',', '.')}}đ</span>
+                            @if($book->discount > 0)<strike style="color: grey">{{ strlen((string) $price)>6?substr(number_format($price, 0, ',', '.'), 0, 4)."...":number_format($price, 0, ',', '.') }}đ</strike>
                             @endif
                             <i class="fas fa-truck" style="float: right; color: #2aabd2">free</i>
                         </span>

@@ -47,11 +47,11 @@
                 <tr>
                     <td>{{ $i++ }}</td>
                     <td>{{ $item->name }}</td>
-                    <td>{{ number_format($item->price, 2, ',', '.') }} đ</td>
+                    <td>{{ number_format($item->price, 0, ',', '.') }} đ</td>
                     <td>{{ $item->discount }}</td>
                     <td>{{ $item->quantity }}</td>
-                    @php($money = round((float)$item->price * (100 - (int)$item->discount)/100 * ((int)$item->quantity), 2))
-                    <td>{{ number_format($money, 2, ',', '.') }} đ</td>
+                    @php($money = round((float)$item->price * (100 - (int)$item->discount)/100 * ((int)$item->quantity), 0))
+                    <td>{{ number_format($money, 0, ',', '.') }} đ</td>
                 </tr>
                 @php($sum += $money)
             @endforeach
@@ -60,7 +60,7 @@
         <div style="overflow: auto">
             <div style="display: inline-block">
                 <span style="font-size: 24px"><strong>Tổng: </strong></span>
-                <span style="color: orangered; font-size: 20px"><strong>{{ number_format($sum, 2, ',', '.') }} đ</strong></span>
+                <span style="color: orangered; font-size: 20px"><strong>{{ number_format($sum, 0, ',', '.') }} đ</strong></span>
             </div>
             <?php
             $date = date("Y-m-d H:i:s", strtotime('-72 hours', time()));

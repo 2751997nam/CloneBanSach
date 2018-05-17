@@ -2,7 +2,7 @@
 
     <div class="row">
         <div class="col-md-7">
-            Categories Manager
+            Quản Lý Thể Loại
         </div>
         @include('category.search')
     </div>

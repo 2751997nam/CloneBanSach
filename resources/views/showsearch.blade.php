@@ -72,8 +72,10 @@
                     </a>
                 </div>
             @empty
-                <div style="width: 100%">
-                    <span>Không Tìm Thấy</span>
+                <div style="width: 1020px; text-align: center; background-color: white">
+                    <div style="padding: 20px 30px">
+                        <span>Không Tìm Thấy</span>
+                    </div>
                 </div>
             @endforelse
 

@@ -4,8 +4,8 @@
         <div style="width: 1200px; margin: auto">
             <ul >
                 <div class="navbar-top-left">
-                    <li class="navbar-link"><a href="javascript:void(0)">Tải Ứng Dụng</a></li>
-                    <li class="navbar-link"><a href="javascript:void(0)">Kết Nối</a>
+                    <li class="navbar-link"><a href="https://play.google.com/store" target="_blank">Tải Ứng Dụng</a></li>
+                    <li class="navbar-link"><a href="https://www.facebook.com/namnguyen275"  target="_blank">Kết Nối</a>
                         <a href="javascript:void(0)"><i class="fab fa-facebook-square"></i></a>
                         <a href="javascript:void(0)"><i class="fab fa-twitter-square"></i></a>
                     </li>
@@ -22,7 +22,6 @@
                                 <a href="javascript:document.getElementById('logout').submit()" style="color: #2aabd2"><li>Đăng Xuất</li></a>
                             </div>
                         </div>
-
                     @else
                         <li class="navbar-link"><a href="{{ route('register') }}">Đăng Ký</a></li>
                         <li class="navbar-link"><a href="{{ route('login') }}">Đăng Nhập</a></li>
@@ -47,11 +46,11 @@
                 <input type="hidden" name="state" value="false">
             </form>
             <div class="hot-words">
-                <a href="javascript:void(0)" class="hot-words-items">aaaa</a>
-                <a href="javascript:void(0)" class="hot-words-items">aaaa</a>
-                <a href="javascript:void(0)" class="hot-words-items">aaaa</a>
-                <a href="javascript:void(0)" class="hot-words-items">aaaa</a>
-                <a href="javascript:void(0)" class="hot-words-items">aaaa</a>
+                <a href="javascript:void(0)" class="hot-words-items">7 viên ngọc rồng</a>
+                <a href="javascript:void(0)" class="hot-words-items">trinh thám</a>
+                <a href="javascript:void(0)" class="hot-words-items">hài hước</a>
+                <a href="javascript:void(0)" class="hot-words-items">truyện tranh</a>
+                <a href="javascript:void(0)" class="hot-words-items">sách giáo khoa</a>
             </div>
         </div>
         <div class="cart-dropdown" role="button">

@@ -64,12 +64,18 @@ class ProductController extends Controller
         $search = session()->get('search');
 
         $searchCate =  session()->get('searchCate');
+//        return $searchCate;
         if($request->has('notSearch') == true){
             if($request->get('notSearch') === "true") {
                 $search = null;
+                $searchCate = "";
+                session()->forget('searchCate');
             }
         }
-        if($searchCate) {
+//        return $request->get('notSearch');
+//        return session()->get('searchCate');
+//        return $searchCate === "" ? "true" : "false";
+        if($searchCate !== "") {
             $books = Book::whereIn('books.id',
                         DB::table('book_category')->select('book_id', DB::raw("count(*) as total"))
                             ->whereIn('book_category.category_id', $searchCate)
@@ -119,7 +125,8 @@ class ProductController extends Controller
             $cmt === null ? $cmt = new Book_user() : "";
         }
         $comments = $book->users()->where('book_id', '=', $id)->where('star', '!=', null)->orderBy('created_at')->paginate(3);
-        $was_paid = $orders->isEmpty() ? 0 : 1;
+        $was_paid = count($orders) < 1 ? 0 : 1;
+//        return count($orders);
         return view('comment', compact('book', 'user', 'comments', 'was_paid', 'cmt'));
     }
 
