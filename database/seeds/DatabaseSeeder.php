@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         DB::beginTransaction();
         try {
-//            $this->call(InsertAdminSeeder::class);
+            $this->call(InsertAdminSeeder::class);
 //            $this->call(UserInformationSeeder::class);
 //            $this->call(EmployeeSeeder::class);
 //            $this->call(BookSeeder::class);

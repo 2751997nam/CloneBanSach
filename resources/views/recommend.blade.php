@@ -1,4 +1,4 @@
-<div class="recommend" style="margin-top: 30px">
+<div class="recommend">
     <div class="recomend-header">
         <span>GỢI Ý HÔM NAY</span>
         <span><a href="javascript:void(0)" style="float: right; color: #f74d18">Xem Tất Cả ></a></span>
