@@ -13,6 +13,9 @@
             <th style="vertical-align: middle"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('categories?field=name&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Name</a>
                 {{ request()->session()->get('field')=='name'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
             </th>
+            <th style="vertical-align: middle"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('categories?field=updated_at&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Updated At</a>
+                {{ request()->session()->get('field')=='updated_at'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
+            </th>
             <th width="160px" style="vertical-align: middle">
                 <a href="javascript:ajaxLoad('{{url(route('categories.create'))}}')"
                    class="btn btn-primary btn-xs"> <i class="fa fa-plus" aria-hidden="true"></i> New categories</a>
@@ -27,6 +30,7 @@
             <tr>
                 <td>{{ $i++ }}</td>
                 <td>{{ $category->name }}</td>
+                <td>{{ $category->updated_at }}</td>
                 <td>
                     <a class="btn btn-warning btn-xs" title="Edit"
                        href="javascript:ajaxLoad('{{url(route('categories.edit', ['id' => $category->id]))}}')">

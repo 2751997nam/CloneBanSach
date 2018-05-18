@@ -25,7 +25,7 @@
             <th style="vertical-align: middle; width: 150px">Address
 
             </th>
-            <th style="vertical-align: middle; width: 150px"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('order?field=created_at&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Created At</a>
+            <th style="vertical-align: middle; width: 150px"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('order?field=updated_at&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Updated At</a>
                 {{ request()->session()->get('field')=='created_at'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
             </th>
         </tr>
@@ -42,7 +42,7 @@
                 <td style="overflow: hidden">{{ $order->phone }}</td>
                 <td style="overflow: hidden">{{ $order->email }}</td>
                 <td style="overflow: hidden">{{ $order->address }}</td>
-                <td style="overflow: hidden">{{ $order->created_at }}</td>
+                <td style="overflow: hidden">{{ $order->updated_at }}</td>
                 <td>
                     {{--<a class="btn btn-warning btn-xs" title="Edit"--}}
                     {{--href="javascript:ajaxLoad('{{url(route('order.edit', ['id' => $order->id]))}}')">--}}

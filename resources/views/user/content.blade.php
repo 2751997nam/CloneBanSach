@@ -44,13 +44,20 @@
                 <td style="overflow: hidden">{{ $user->information ? $user->information->phone : "" }}</td>
                 <td style="overflow: hidden">{{ $user->information ? $user->information->gender : ""}}</td>
                 <td style="overflow: hidden">{{ $user->information ? date('d-m-Y', strtotime($user->information->dob)) : "" }}</td>
-                <td style="overflow: hidden">{{ $user->status == 0 ? "unverified" : "verified" }}</td>
+                <td style="overflow: hidden">{{ $user->status == 0 ? "unverified" : ($user->status > 1 ? "disabled" : "verified") }}</td>
                 <td>
-                    <input type="hidden" name="_method" value="delete"/>
-                    <a class="btn btn-danger btn-xs" title="Delete"
-                       href="javascript:if(confirm('Are you sure want to delete?')) ajaxDelete('{{url(route('users.destroy', ['id' => $user->id]))}}','{{csrf_token()}}')">
-                        Delete
-                    </a>
+                    <input type="hidden" name="_method" value="put"/>
+                    @if($user->status < 2)
+                        <a class="btn btn-danger btn-xs" title="Disable"
+                           href="javascript:if(confirm('Are you sure want to disable this account?')) ajaxDisable('{{url(route('users.disable', ['id' => $user->id]))}}','{{csrf_token()}}')">
+                            Disable
+                        </a>
+                    @else
+                        <a class="btn btn-success btn-xs" title="Enable"
+                           href="javascript:if(confirm('Are you sure want to enable this account?')) ajaxDisable('{{url(route('users.enable', ['id' => $user->id]))}}','{{csrf_token()}}')">
+                            Enable
+                        </a>
+                    @endif
                 </td>
             </tr>
         @empty

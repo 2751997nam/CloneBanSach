@@ -33,6 +33,10 @@
             <th style="vertical-align: middle; width: 150px"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('employees?field=salary_level&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Salary Level</a>
                 {{ request()->session()->get('field')=='salary_level'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
             </th>
+
+            <th style="vertical-align: middle; width: 150px"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('employees?field=updated_at&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Updated At</a>
+                {{ request()->session()->get('field')=='updated_at'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
+            </th>
             <th width="160px" style="vertical-align: middle">
                 <a href="javascript:ajaxLoad('{{ route('employees.create') }}')"
                    class="btn btn-primary btn-xs"> <i class="fa fa-plus" aria-hidden="true"></i> New employees</a>
@@ -52,6 +56,7 @@
                 <td style="overflow: hidden">{{ date('d-m-Y', strtotime($employee->dob)) }}</td>
                 <td style="overflow: hidden">{{ $employee->position}}</td>
                 <td style="overflow: hidden">{{ $employee->salary_level }}</td>
+                <td>{{ $employee->created_at }}</td>
                 <td>
                     <a class="btn btn-warning btn-xs" title="Edit"
                        href="javascript:ajaxLoad('{{url(route('employees.edit', ['id' => $employee->id]))}}')">

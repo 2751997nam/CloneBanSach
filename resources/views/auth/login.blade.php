@@ -107,9 +107,12 @@
         </div>
     </div>
     <div style="margin-bottom: 10px">
-    @if($errors->has('verified'))
-        <span style="color: red">{{ $errors->first('verified') }}</span>
+    @if($errors->has('verify'))
+        <span style="color: red">{{ $errors->first('verify') }}</span>
         <p><a href="{{ route('verify.resendVerifyView') }}">Gửi lại link xác nhận</a></p>
+    @endif
+    @if($errors->has('disabled'))
+        <span style="color: red">{{ $errors->first('disabled') }}</span>
     @endif
     </div>
     <div class="inputGroup inputGroup1">

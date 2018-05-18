@@ -19,6 +19,9 @@
             <th style="vertical-align: middle"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('positions?field=base_salary_level&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Base Salary Level</a>
                 {{ request()->session()->get('field')=='base_salary_level'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
             </th>
+            <th style="vertical-align: middle"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('positions?field=updated_at&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Updated At</a>
+                {{ request()->session()->get('field')=='updated_at'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
+            </th>
             <th width="160px" style="vertical-align: middle">
                 <a href="javascript:ajaxLoad('{{url(route('positions.create'))}}')"
                    class="btn btn-primary btn-xs"> <i class="fa fa-plus" aria-hidden="true"></i> New Positions</a>
@@ -35,6 +38,7 @@
                 <td>{{ $position->position_code }}</td>
                 <td>{{ $position->name }}</td>
                 <td>{{ $position->base_salary_level }}</td>
+                <td>{{ $position->updated_at }}</td>
                 <td>
                     <a class="btn btn-warning btn-xs" title="Edit"
                        href="javascript:ajaxLoad('{{url(route('positions.edit', ['id' => $position->id]))}}')">

@@ -50,7 +50,9 @@ Route::group(['prefix' => '/pdf', 'as' => 'pdf.', 'middleware' => ['auth', 'leve
 
 Route::resource('/positions', 'PositionsController')->middleware( ['auth', 'level']);
 
-Route::resource('/users', 'UserController')->middleware( ['auth', 'level']);
+Route::put('/users/disable/{id}', 'UserController@disable')->name('users.disable')->middleware( ['auth', 'level']);
+Route::put('/users/enable/{id}', 'UserController@enable')->name('users.enable')->middleware( ['auth', 'level']);
+Route::resource('/users', 'UserController')->middleware( ['auth']);
 
 Route::group(['prefix' => '/book_user', 'as' => 'book_user.', 'middleware' => ['auth', 'level']], function () {
     Route::post('/', 'Book_userController@store')->name('store');
@@ -75,7 +77,7 @@ Route::group(['prefix' => 'cart', 'as' => 'cart.', 'middleware' => ['auth']], fu
     Route::put('/update', 'CartController@update')->name('update');
     Route::delete('/', 'CartController@destroy')->name('destroy');
 });
-Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['auth', 'level']], function() {
+Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['auth']], function() {
     Route::get('/account', 'UserController@account')->name('account');
     Route::get('/profile', 'UserController@profile')->name('profile');
 //    Route::get('/order', 'UserController@order')->name('order');
@@ -85,7 +87,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['auth', 'lev
     Route::get('/showOptionOrder/{status}', 'OrderController@showOptionOrder')->name('showOptionOrder');
 });
 //Route::resource('/order', 'OrderController')->middleware('auth');
-Route::group(['prefix' => 'order', 'as' => 'order.', 'middleware' => ['auth', 'level']], function () {
+Route::group(['prefix' => 'order', 'as' => 'order.', 'middleware' => ['auth']], function () {
     Route::get('/', 'OrderController@index')->name('index');
     Route::get('/create', 'OrderController@create')->name('create');
     Route::post('/store', 'OrderController@store')->name('store');

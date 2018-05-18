@@ -38,6 +38,9 @@
                     <th style="vertical-align: middle; width: 100px"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('book?field=quantity&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Quantity</a>
                         {{ request()->session()->get('field')=='quantity'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
                     </th>
+                    <th style="vertical-align: middle; width: 100px"><a class="ajaxlink" href="javascript:ajaxLoad('{{ url('book?field=updated_at&sort='.(request()->session()->get('sort')=='asc'?'desc':'asc')) }}')">Updated At</a>
+                        {{ request()->session()->get('field')=='updated_at'?(request()->session()->get('sort')=='asc'?'▴':'▾'):'' }}
+                    </th>
                     {{--<th width="160px" style="vertical-align: middle">--}}
                         {{--<a href="javascript:ajaxLoad('{{url('book/create')}}')"--}}
                            {{--class="btn btn-primary btn-xs"> <i class="fa fa-plus" aria-hidden="true"></i> New Book</a>--}}
@@ -67,9 +70,10 @@
                     <td style="overflow: hidden">{{ $book->author }}</td>
                     <td  style="overflow: hidden">{{ strlen($book->description) > 150 ? substr($book->description, 0, 150)."..." : $book->description }}</td>
                     <td style="overflow: hidden">{{ $book->publisher }}</td>
-                    <td style="overflow: hidden">{{ $book->price }}</td>
+                    <td style="overflow: hidden">{{ number_format($book->price, 0, ',', '.') }} đ</td>
                     <td style="overflow: hidden">{{ $book->discount }}</td>
                     <td style="overflow: hidden">{{ $book->quantity }}</td>
+                    <td style="overflow: hidden">{{ $book->updated_at }}</td>
                     <td>
                         {{--<a class="btn btn-warning btn-xs" title="Edit"--}}
                            {{--href="javascript:ajaxLoad('{{url(route('book.edit', ['id' => $book->id]))}}')">--}}

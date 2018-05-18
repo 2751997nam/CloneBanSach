@@ -30,7 +30,7 @@ class PositionsController extends Controller
 
         $request->session()->flash('sort', $request
             ->has('sort') ? $request->get('sort') : ($request->session()
-            ->has('sort') ? $request->session()->get('sort') : 'asc'));
+            ->has('sort') ? $request->session()->get('sort') : 'desc'));
     }
 
     public function index(Request $request)

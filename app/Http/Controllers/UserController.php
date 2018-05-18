@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -63,7 +64,7 @@ class UserController extends Controller
 
         $request->session()->flash('sort', $request
             ->has('sort') ? $request->get('sort') : ($request->session()
-            ->has('sort') ? $request->session()->get('sort') : 'asc'));
+            ->has('sort') ? $request->session()->get('sort') : 'desc'));
     }
 
     public function index(Request $request)
@@ -151,19 +152,14 @@ class UserController extends Controller
 //        return $request->all();
         $this->validate($request, [
             'name' => 'required|min:5|max:100',
-            'email' => ['required', 'email',
-                Rule::unique('users')->ignore($id)
-            ],
             'phone' => 'min:10|max:15|phone|nullable',
             'dob' => 'date|nullable'
         ]);
-//        return $request->all();
         DB::beginTransaction();
         try {
             $user = User::find($id);
-            $info = User_information::where('user_id', '=', $id)->first();
             if ($request->has('name')) $user->name = $request->name;
-            if ($request->has('email')) $user->email = $request->email;
+            $info = User_information::where('user_id', '=', $id)->first();
             if ($info === null) {
                 $info = new User_information();
             }
@@ -241,9 +237,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        User::destroy($id);
+//    public function destroy($id)
+//    {
+//        User::destroy($id);
+//        return redirect('users');
+//    }
+
+    public function disable($id) {
+        $user = User::find($id);
+        $user->status = 2;
+        $user->save();
+        return redirect('users');
+    }
+
+    public function enable($id) {
+        $user = User::find($id);
+        $user->status = 0;
+        $user->verifyToken = Str::random(40);
+        $user->save();
         return redirect('users');
     }
 }

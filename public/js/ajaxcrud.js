@@ -47,6 +47,7 @@ function ajaxLoad(filename, content) {
         },
         error: function (xhr, status, error) {
             alert(xhr.responseText);
+            $('.loading').hide();
         }
     });
 }
@@ -64,6 +65,7 @@ function ajaxDelete(filename, token, content) {
         },
         error: function (xhr, status, error) {
             alert(xhr.responseText);
+            $('.loading').hide();
         }
     });
 }

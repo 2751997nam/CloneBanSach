@@ -53,7 +53,11 @@ class LoginController extends Controller
             $user = Auth::user();
             if(!$user->verified()) {
                 Auth::logout();
-                return redirect()->route('login')->withErrors(['verified' =>  'Hãy xác nhận email của bạn']);
+                return redirect()->route('login')->withErrors(['verify' =>  'Hãy xác nhận email của bạn']);
+            }
+            if($user->disabled()) {
+                Auth::logout();
+                return redirect()->route('login')->withErrors(['disabled' =>  'Tài khoản của bạn đã bị vô hiệu hoá']);
             }
             if($user->is_customer === 1)
                 return redirect($this->redirectTo);

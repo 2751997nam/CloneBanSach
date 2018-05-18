@@ -35,4 +35,5 @@
 
 @section('script')
     <script src="{{ asset('js/ajaxcrud.js') }}"></script>
+    <script src="{{ asset('js/disableUser.js') }}"></script>
 @endsection

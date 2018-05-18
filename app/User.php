@@ -47,7 +47,11 @@ class User extends Authenticatable
     }
 
     public function verified() {
-        return $this->status == 1;
+        return $this->status > 0;
+    }
+
+    public function disabled() {
+        return $this->status == 2;
     }
 
     public function sendPasswordResetNotification($token)
