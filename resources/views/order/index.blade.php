@@ -50,7 +50,8 @@
                     method: "Post",
                     data: {id: order_id, _method: "delete", _token: "{{ csrf_token() }}"},
                     success: function (result) {
-                        element.parents('tr').remove();
+                        // element.parents('tr').remove();
+                        $('#content').html(result);
                     },
                     errors: function (result) {
                         alert(result);

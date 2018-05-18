@@ -40,13 +40,18 @@
         </div>
 
         @php
-            $positions = \App\Position::all()->pluck('name', 'id');
+            $positions = \App\Position::orderBy('name')->get();
         @endphp
 
         <div class="form-group row required">
             {!! Form::label("position","Position",["class"=>"col-form-label col-md-3 col-lg-2"]) !!}
             <div class="col-md-8">
-                {!! Form::select("position",$positions, null,["class"=>"form-control"]) !!}
+                {{--{!! Form::select("position",$positions, null,["class"=>"form-control"]) !!}--}}
+                <select name="position" id="position" class="form-control">
+                    @foreach($positions as $position)
+                        <option value="{{ $position->id }}"> {{ $position->name . " - " . $position->base_salary_level }}</option>
+                    @endforeach
+                </select>
                 <span id="error-" class="invalid-feedback"></span>
             </div>
         </div>

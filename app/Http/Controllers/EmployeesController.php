@@ -30,7 +30,7 @@ class EmployeesController extends Controller
 
         $request->session()->flash('sort', $request
             ->has('sort') ? $request->get('sort') : ($request->session()
-            ->has('sort') ? $request->session()->get('sort') : 'asc'));
+            ->has('sort') ? $request->session()->get('sort') : 'desc'));
     }
 
 
@@ -103,27 +103,29 @@ class EmployeesController extends Controller
     public function createEmployee(Request $request, User $user) {
         $employee = new Employee();
         if($user !== null) {
-            $employee = Employee::findOrFail($user->id);
+            $employee = Employee::find($user->id);
+            if(!$employee) $employee = new Employee();
         }
-        $id = $this->createUser($request, $user);
-        if($id === "fail") return;
-
-        $employee->id = $id;
-
-        $b = Employee::orderBy('id', 'desc')->first();
-        $count = 1;
-        if($b !== null) $count = $b->id + 1;
-        if($employee->employee_code === null)
-            $employee->employee_code = $count < 10 ? "E"."000".$count:($count < 100 ? "E"."00".$count:($count < 1000?"E"."0".$count:"E".$count));
-        $employee->dob = $request->dob;
-        $request->has('salary_level') ? $employee->salary_level = $request->salary_level : $employee->salary_level = Position::find($request->input('position'))->base_salary_level;
-        $employee->position_id = $request->position;
-        $employee->level = 1;
-
+        DB::beginTransaction();
         try{
+            $id = $this->createUser($request, $user);
+            if($id === "fail") return "Failed";
+
+            $employee->id = $id;
+
+            $b = Employee::orderBy('id', 'desc')->first();
+            $count = 1;
+            if($b !== null) $count = $b->id + 1;
+            if($employee->employee_code === null)
+                $employee->employee_code = $count < 10 ? "E"."000".$count:($count < 100 ? "E"."00".$count:($count < 1000?"E"."0".$count:"E".$count));
+            $employee->dob = $request->dob;
+            $request->has('salary_level') ? $employee->salary_level = $request->salary_level : $employee->salary_level = Position::find($request->input('position'))->base_salary_level;
+            $employee->position_id = $request->position;
+            $employee->level = 1;
             $employee->save();
+            DB::commit();
         }catch (Exception $e) {
-            User::destroy($id);
+            DB::rollBack();
             return $e;
         }
 

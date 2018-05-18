@@ -235,7 +235,7 @@ class OrderController extends Controller
             Order::destroy($request->id);
             DB::commit();
 //            session()->flash('page', '/user/order');
-            return redirect()->route('user.showOrder');
+            return redirect()->back();
         }catch (\Exception $e) {
             DB::rollBack();
             return $e;
